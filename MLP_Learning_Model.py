@@ -237,7 +237,7 @@ class DCN(nn.Module):
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-skf = KFold(n_splits=10, shuffle=True, random_state=None)
+skf = KFold(n_splits=5, shuffle=True, random_state=None)
 all_fold_preds = []
 all_fold_labels = []
 all_fold_probs = []
@@ -279,7 +279,7 @@ for train_index, test_index in skf.split(X, y):
     criterion = nn.BCEWithLogitsLoss()
     optimizer = optim.Adam(model.parameters(), lr=1e-4)
 
-    for epoch in range(300):  # 10 epoch
+    for epoch in range(100):  
         model.train()
         train_loss = 0
         for X_batch, y_batch in train_loader:
